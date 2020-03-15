@@ -13,70 +13,24 @@
 {% endblock %}
 {% block content %}
   <main class="container mt-3">
-    <h1 class="display-5 mt-4">Летим из Новосибирска</h1>
-    <p class="mb-4">Найдено 15 туров, от 26 000 до 84 600 и от 4 ночей до 15 ночей</p>
+    <h1 class="display-5 mt-4">Летим {% for i, j in nav.items()  %} {% if i == departure_id %} {{ j }} {% endif %} {% endfor %}</h1>
+    <p class="mb-4">Найдено {{ tour_id|length }} {% if tour_id|length == 1 %}тур{% elif tour_id|length > 1 and tour_id|length < 5 %}тура{% else %}туров{% endif %}, от {{ content[0] }} до {{ content[1] }} и от {{ content[2] }} ночей до {{ content[3] }} ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
+      {% for card in range(tour|length) %}
       <div class="col-4">
         <div class="card mb-4">
-          <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" alt="">
+          <div class="embed-responsive embed-responsive-16by9">
+          <img src="{{ tour[card].picture }}" class="card-img-top embed-responsive-item" alt="">
+          </div>
           <div class="card-body">
-            <h2 class="h5 card-title">Hotel title</h2>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-sm btn-primary">Подробнее</a>
+            <h2 class="h5 card-title">{{ tour[card].title }}</h2>
+            <p class="card-text">{{ tour[card].description|truncate(100) }}</p>
+            <a href="/tour/{{ tour_id[card] }}" class="btn btn-sm btn-primary">Подробнее</a>
           </div>
         </div>
       </div>
-      <div class="col-4">
-        <div class="card mb-4">
-          <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" alt="">
-          <div class="card-body">
-            <h2 class="h5 card-title">Hotel title</h2>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-sm btn-primary">Подробнее</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="card mb-4">
-          <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" alt="">
-          <div class="card-body">
-            <h2 class="h5 card-title">Hotel title</h2>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-sm btn-primary">Подробнее</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="card mb-4">
-          <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" alt="">
-          <div class="card-body">
-            <h2 class="h5 card-title">Hotel title</h2>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-sm btn-primary">Подробнее</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="card mb-4">
-          <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" alt="">
-          <div class="card-body">
-            <h2 class="h5 card-title">Hotel title</h2>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-sm btn-primary">Подробнее</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="card mb-4">
-          <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" alt="">
-          <div class="card-body">
-            <h2 class="h5 card-title">Hotel title</h2>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-sm btn-primary">Подробнее</a>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </main>
   {% endblock %}}

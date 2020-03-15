@@ -12,7 +12,25 @@ def render_index_html():
 
 @app.route('/departure/<departure>')
 def render_departure(departure):
-    return render_template('departure.html', title_page=title, nav=departures)
+    list_departure = []
+    list_tour = []
+    for i in tours:
+        if tours[i]['departure'] == departure:
+            list_departure.append(i)
+    for j in list_departure:
+        list_tour.append(tours[j])
+    temp_price = []
+    temp_night = []
+    for pn in list_tour:
+        temp_price.append(pn['price'])
+        temp_night.append(pn['nights'])
+    description_content = []
+    description_content.append(min(temp_price))
+    description_content.append(max(temp_price))
+    description_content.append((min(temp_night)))
+    description_content.append((max(temp_night)))
+
+    return render_template('departure.html', title_page=title, nav=departures, tour=list_tour, tour_id=list_departure, departure_id=departure, content=description_content)
 
 @app.route('/tour/<id>/')
 def render_tour(id):
