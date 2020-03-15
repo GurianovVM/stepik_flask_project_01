@@ -36,4 +36,5 @@ def render_departure(departure):
 def render_tour(id):
     return render_template('tour.html', title_page=title, nav=departures, tour=tours[int(id)])
 
-app.run()
+if __name__ == '__main__':
+    app.run()
